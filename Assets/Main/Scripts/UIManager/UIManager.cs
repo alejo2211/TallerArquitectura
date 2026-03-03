@@ -11,45 +11,38 @@ public class UIManager : MonoBehaviour
         Shield,
         DamageBoost
     }
-    private PowerUpType powerUpType;
+    private PowerUpType selectedPowerUp;// Esta variable guarda qué power-up está elegido actualmente.
 
-    [SerializeField] private TMP_Text selectedPowerUpText;
+    [SerializeField] private TMP_Text messageText;
 
-    public PowerUpType currentSelectedPowerUp;
+    [SerializeField] private TMP_InputField inputField;
 
-    public void SelectPowerUp(PowerUpType _powerup)
+  
+
+    public void SeleccionVida()
     {
-       powerUpType = _powerup;
+        SeleccionPowerUp(PowerUpType.Heal);
     }
-    public void Heal()
+    public void SeleccionVelocidad()
     {
-        powerUpType = PowerUpType.Heal;
+        SeleccionPowerUp(PowerUpType.SpeedBoost);
     }
-    public void SpeedBoost()
+    public void SeleccionEscudo()
     {
-        powerUpType = PowerUpType.SpeedBoost;
+        SeleccionPowerUp(PowerUpType.Shield);
     }
-    public void Shield()
+    public void SeleccionDaño()
     {
-        powerUpType = PowerUpType.Shield;  
+       SeleccionPowerUp (PowerUpType.DamageBoost);
     }
-    public void DamageBoost()
+    private void SeleccionPowerUp(PowerUpType type) // Aqui solo guarda el enum, solo se actualiza texto
     {
-        powerUpType = PowerUpType.DamageBoost;
+        selectedPowerUp = type;
+        messageText.text = "Seleccionado" + type.ToString();
     }
 
 
 
-    public void UpdateUI()
-    {
 
-        switch (powerUpType)
-        {
-            case PowerUpType.Heal:
-            default:
-                break;
-        }
-
-    }
 
 }
