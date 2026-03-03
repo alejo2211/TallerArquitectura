@@ -357,7 +357,6 @@ GameObject:
   m_Component:
   - component: {fileID: 330585546}
   - component: {fileID: 330585545}
-  - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   m_Layer: 0
   m_Name: Main Camera
@@ -366,14 +365,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &330585544
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
 --- !u!20 &330585545
 Camera:
   m_ObjectHideFlags: 0
@@ -497,7 +488,7 @@ GameObject:
   - component: {fileID: 357792524}
   - component: {fileID: 357792523}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Boton de escudo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1466,6 +1457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   messageText: {fileID: 1338182478}
   inputField: {fileID: 1769905445}
+  playerStats: {fileID: 1251059480}
 --- !u!4 &1187323974
 Transform:
   m_ObjectHideFlags: 0
@@ -1649,6 +1641,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1251059479}
+  - component: {fileID: 1251059480}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1672,6 +1665,23 @@ Transform:
   - {fileID: 711511413}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1251059480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251059478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16b6246781272974fa5b8633128b0ce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vidaMaxima: 100
+  vidaActual: 8
+  VelocidadBase: 5
+  VelocidadActual: 0
+  chalecoActivo: 1
 --- !u!1 &1290103727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1742,7 +1752,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 639, y: -190.3}
+  m_AnchoredPosition: {x: 703, y: 9}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1338182478
@@ -1832,7 +1842,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -190.15247, y: 0, z: -134.54163, w: -175.80124}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3017,7 +3027,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2084906468}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1187323973}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: AplicarPowerUpSeleccionado
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2084906468
 MonoBehaviour:
   m_ObjectHideFlags: 0

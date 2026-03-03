@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using UnityEditorInternal;
+
 
 public class UIManager : MonoBehaviour
 {
@@ -17,9 +17,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private TMP_InputField inputField;
 
-    private PlayerStats playerStats;
+    [SerializeField]private PlayerStats playerStats;
 
-  
+
 
     public void SeleccionVida()
     {
@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
     }
     public void SeleccionDaño()
     {
-       SeleccionPowerUp (PowerUpType.DamageBoost);
+        SeleccionPowerUp(PowerUpType.DamageBoost);
     }
     private void SeleccionPowerUp(PowerUpType type) // Aqui solo guarda el enum, solo se actualiza texto
     {
@@ -66,9 +66,17 @@ public class UIManager : MonoBehaviour
     }
     public void AplicarPowerUpSeleccionado()
     {
+        print("0");
         if (!ValidarReferencias()) return;
+        print("1");
         if (!TryReadValue(out float value)) return;
-      
+        print("2");
+        if (!ValidacionDeReglas(value)) return;
+        print("3");
+        AplicarPowerUp(value);
+        
+        print("4");
+
     }
     private bool TryReadValue(out float value)
     {
@@ -89,8 +97,68 @@ public class UIManager : MonoBehaviour
         return true;
     }
 
+    private bool ValidacionDeReglas(float valor)
+    {
+        if (valor < 0f)
+        {
+            messageText.text = "El valor debe ser mayor que 0.";
+            return false;
+        }
+
+        switch (selectedPowerUp)
+        {
+            case PowerUpType.Heal:
+                if (playerStats.vidaActual >= playerStats.vidaMaxima)
+                {
+                    messageText.text = "La vida ya esta al maximo";
+                    return false;
+                }
+                break;
+            case PowerUpType.SpeedBoost:
+                if (valor > 5f)
+                {
+                    messageText.text = "Multiplicador demasiado alto";
+                    return false;
+                }
+                break;
+            case PowerUpType.Shield:
+                if (playerStats.chalecoActivo)
+                {
+                    messageText.text = "EL ESCUDO YA ESTA ACTIVO";
+                    return false;
+                }
+                break;
+            case PowerUpType.DamageBoost:
+                break;
+
+        }
+        return true;
+    }
+    private void AplicarPowerUp(float value)
+    {
+        switch (selectedPowerUp)
+        {
+            case PowerUpType.Heal:
+                playerStats.Vida(value);
+                messageText.text = "vida actual: " + playerStats.vidaActual;
+                break;
+            case PowerUpType.SpeedBoost:
+                playerStats.MultiplicarVelocidad(value);
+                messageText.text = "velocidad actual: " + playerStats.VelocidadActual;
+                break;
+            case PowerUpType.Shield:
+                playerStats.ColocarEscudo(value);
+                messageText.text = " ESCUDO ACTIVADO ";
+                break;
+            case PowerUpType.DamageBoost:
+                messageText.text = "Daño aumentado en: " + value;
+                break;
+        }
+        
 
 
 
 
+
+    }
 }
