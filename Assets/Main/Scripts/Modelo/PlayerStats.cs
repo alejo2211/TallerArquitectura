@@ -1,4 +1,3 @@
-using Unity.Hierarchy;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -8,6 +7,7 @@ public class PlayerStats : MonoBehaviour
     public float VelocidadBase = 5f;
     public float VelocidadActual;
     public bool chalecoActivo;
+
     void Start()
     {
         vidaActual = vidaMaxima;
@@ -30,9 +30,14 @@ public class PlayerStats : MonoBehaviour
     {
         chalecoActivo = true;
     }
-    // Update is called once per frame
-    void Update()
+    public void CausarDaño(float amountdaño)
     {
-        
+        if (chalecoActivo)
+        {
+            return;
+        }
+        vidaActual -= amountdaño;
+        if (vidaActual <0)
+            vidaActual =0;
     }
 }

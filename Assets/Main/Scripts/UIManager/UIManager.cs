@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
         Shield,
         DamageBoost
     }
-    private PowerUpType selectedPowerUp;// Esta variable guarda qué power-up está elegido actualmente.
+    private PowerUpType selectedPowerUp; // Esta variable guarda qué power-up está elegido actualmente.
 
     [SerializeField] private TMP_Text messageText;
 
@@ -40,7 +40,7 @@ public class UIManager : MonoBehaviour
     private void SeleccionPowerUp(PowerUpType type) // Aqui solo guarda el enum, solo se actualiza texto
     {
         selectedPowerUp = type;
-        messageText.text = "Seleccionado" + type.ToString();
+        messageText.text = "Seleccionado: " + type.ToString();
     }
     private bool ValidarReferencias()
     {
@@ -66,23 +66,23 @@ public class UIManager : MonoBehaviour
     }
     public void AplicarPowerUpSeleccionado()
     {
-        print("0");
+        
         if (!ValidarReferencias()) return;
-        print("1");
+       
         if (!TryReadValue(out float value)) return;
-        print("2");
+       
         if (!ValidacionDeReglas(value)) return;
-        print("3");
+       
         AplicarPowerUp(value);
         
-        print("4");
+      
 
     }
-    private bool TryReadValue(out float value)
+    private bool TryReadValue(out float value) //  el out float, permite que el método devuelva el número leído 
     {
         value = 0f;
 
-        if (string.IsNullOrWhiteSpace(inputField.text))
+        if (string.IsNullOrWhiteSpace(inputField.text)) 
         {
             messageText.text = "Ingrese un valor.";
             return false;
@@ -129,6 +129,8 @@ public class UIManager : MonoBehaviour
                 }
                 break;
             case PowerUpType.DamageBoost:
+                playerStats.CausarDaño(valor);
+                messageText.text = "Vida restante: " + playerStats.vidaActual;
                 break;
 
         }
@@ -151,7 +153,7 @@ public class UIManager : MonoBehaviour
                 messageText.text = " ESCUDO ACTIVADO ";
                 break;
             case PowerUpType.DamageBoost:
-                messageText.text = "Daño aumentado en: " + value;
+                messageText.text = "Daño causado : " + value;
                 break;
         }
         
